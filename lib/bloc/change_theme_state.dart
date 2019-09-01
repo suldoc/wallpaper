@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wallpapers/bloc/utils.dart';
+import 'package:suldoc/bloc/utils.dart';
 
 class ChangeThemeState {
   final ThemeData themeData;

@@ -1,120 +1,116 @@
-import 'package:wallpapers/screens/wallpaper.dart';
-import 'package:wallpapers/utils/widgets.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:suldoc/screens/liquor_list.dart';
 
 class MainBody extends StatelessWidget {
-  final List<String> _trendingImages = [
-    'https://images.pexels.com/photos/35857/amazing-beautiful-breathtaking-clouds.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-    'https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80',
-    'https://images.pexels.com/photos/1037992/pexels-photo-1037992.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+  final List<String> _category = [
+    '맥주',
+    '소주',
+    '막걸리',
+    '청주',
+    '사케',
+    '와인',
+    '고량주',
+    '위스키',
+    '꼬냑',
+    '보드카',
+    '기타'
   ];
-  final List<String> _popularImages = [
-    'https://images.pexels.com/photos/990826/pexels-photo-990826.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-    'https://images.pexels.com/photos/1227497/pexels-photo-1227497.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-    'https://images.pexels.com/photos/1493378/pexels-photo-1493378.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+  final List<String> _categoryImage = [
+    'assets/images/beer.jpg',       // '맥주',
+    'assets/images/soju.jpg',       // '소주',
+    'assets/images/Makgeolli.jpg',  // '막걸리',
+    'assets/images/rice_wine.png',  // '청주',
+    'assets/images/sake.png',       // '사케',
+    'assets/images/wine.jpg',       // '와인',
+    'assets/images/kaoliang.png',   // '고량주',
+    'assets/images/whiskey.jpg',    // '위스키',
+    'assets/images/cognac.jpg',     // '꼬냑',
+    'assets/images/vodka.jpg',      // '보드카',
+    'assets/images/etc.png',        // '기타'
   ];
 
   @override
   Widget build(BuildContext context) {
-    ThemeData _themeData = Theme.of(context);
-    return Container(
-      color: Theme.of(context).primaryColor,
-      child: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Column(
-          children: <Widget>[
-            ShowMore(text: 'Trending', onTap: () {}),
-            CarouselSlider(
-              autoPlay: true,
-              height: 200.0,
-              items: _trendingImages.map((index) {
-                return Builder(
-                  builder: (BuildContext context) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Card(
-                        elevation: 5,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => WallpaperPage(
-                                          heroId: 'trending$index',
-                                          imageUrl: index,
-                                          themeData: _themeData,
-                                        )));
-                          },
-                          child: Hero(
-                            tag: 'trending$index',
-                            child: Container(
-                              width: double.infinity,
-                              height: 200,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(8.0),
-                                child: FadeInImage(
-                                  image: NetworkImage(index),
-                                  fit: BoxFit.cover,
-                                  placeholder:
-                                      AssetImage('assets/images/loading.gif'),
+    var _width = MediaQuery.of(context).size.width / 2;
+
+    return Scaffold(
+//      appBar: AppBar(
+//        centerTitle: true,
+//        elevation: 5,
+//        title: Row(
+//          mainAxisAlignment: MainAxisAlignment.center,
+//          children: <Widget>[
+//            Padding(
+//              padding: const EdgeInsets.all(4.0),
+//              child: Image.asset(
+//                'assets/images/logo.png',
+//                height: 30,
+//              ),
+//            ),
+//            Text(
+//              'SulDoc',
+//              style: Theme.of(context).textTheme.headline,
+//            )
+//          ],
+//        ),
+//        textTheme: Theme.of(context).textTheme,
+//        backgroundColor: Colors.blueAccent
+//      ),
+      body: Container(
+        color: Colors.white,
+        child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: Column(
+            children: <Widget>[
+              GridView.builder(
+                shrinkWrap: true,
+                physics: BouncingScrollPhysics(),
+                itemCount: _category.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2),
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: <Widget>[
+                        Card(
+                            elevation: 5,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: new InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => LiquorList(_category[index])),
+                                );
+                              },
+                              child: Container(
+                                width: _width,
+                                height: _width - 50,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: FadeInImage(
+                                    image: AssetImage(_categoryImage[index]),
+                                    fit: BoxFit.cover,
+                                    placeholder:
+                                        AssetImage('assets/images/loading.gif'),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                );
-              }).toList(),
-            ),
-            ShowMore(text: 'Popular', onTap: () {}),
-            ListView.builder(
-              itemCount: _popularImages.length,
-              shrinkWrap: true,
-              physics: ClampingScrollPhysics(),
-              scrollDirection: Axis.vertical,
-              itemBuilder: (BuildContext context, int index) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => WallpaperPage(
-                                    heroId: 'popular$index',
-                                    imageUrl: _popularImages[index],
-                                    themeData: _themeData,
-                                  )));
-                    },
-                    child: Hero(
-                      tag: 'popular$index',
-                      child: Container(
-                        width: double.infinity,
-                        height: 200,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: FadeInImage(
-                            image: NetworkImage(_popularImages[index]),
-                            fit: BoxFit.cover,
-                            placeholder:
-                                AssetImage('assets/images/loading.gif'),
-                          ),
-                        ),
-                      ),
+                            )),
+                        Text(_category[index],
+                            style: Theme.of(context).textTheme.body2),
+                      ],
                     ),
-                  ),
-                );
-              },
-            ),
-          ],
-        ),
-      ),
+                  );
+                },
+              ),
+            ],
+          ),
+        )
+      )
     );
   }
 }

@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 
-class WallpaperSearch extends SearchDelegate<String> {
-  final List<String> wallpapers;
-  List<String> filteredwallpapers = [];
-  WallpaperSearch({this.wallpapers});
+class AlcoholDataSearch extends SearchDelegate<String> {
+  final List<String> alcohols;
+  List<String> filteredAlcohols = [];
+  AlcoholDataSearch({this.alcohols});
 
-  // @override
-  // ThemeData appBarTheme(BuildContext context) {
-  //   assert(context != null);
-  //   final ThemeData theme = Theme.of(context).copyWith(
-  //       hintColor: Theme.of(context).accentColor,
-  //       primaryColor: Theme.of(context).primaryColor,
-  //       textTheme: TextTheme(
-  //         title: TextStyle(
-  //             color: Theme.of(context).accentColor, fontWeight: FontWeight.bold, fontSize: 16),
-  //       ));
-  //   assert(theme != null);
-  //   return theme;
-  // }
+   @override
+   ThemeData appBarTheme(BuildContext context) {
+     assert(context != null);
+     final ThemeData theme = Theme.of(context).copyWith(
+         hintColor: Theme.of(context).accentColor,
+         primaryColor: Theme.of(context).primaryColor,
+         textTheme: TextTheme(
+           title: TextStyle(
+               color: Theme.of(context).accentColor, fontWeight: FontWeight.bold, fontSize: 16),
+         ));
+     assert(theme != null);
+     return theme;
+   }
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -74,9 +74,9 @@ class WallpaperSearch extends SearchDelegate<String> {
         )),
       );
     } else {
-      filteredwallpapers = [];
-      getFilteredList(wallpapers);
-      if (filteredwallpapers.length == 0) {
+      filteredAlcohols = [];
+      getFilteredList(alcohols);
+      if (filteredAlcohols.length == 0) {
         return Container(
           color: Theme.of(context).primaryColor,
           child: Center(
@@ -104,9 +104,9 @@ class WallpaperSearch extends SearchDelegate<String> {
         return Container(
           color: Theme.of(context).primaryColor,
           child: ListView.builder(
-            itemCount: filteredwallpapers.length == null
+            itemCount: filteredAlcohols.length == null
                 ? 0
-                : filteredwallpapers.length,
+                : filteredAlcohols.length,
             itemBuilder: (context, index) {
               return ListTile(
                 leading: Icon(
@@ -114,14 +114,14 @@ class WallpaperSearch extends SearchDelegate<String> {
                   color: Theme.of(context).accentColor,
                 ),
                 title: Text(
-                  filteredwallpapers[index],
+                  filteredAlcohols[index],
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18.0,
                       color: Theme.of(context).accentColor),
                 ),
                 onTap: () {
-                  close(context, filteredwallpapers[index]);
+                  close(context, filteredAlcohols[index]);
                 },
               );
             },
@@ -134,10 +134,10 @@ class WallpaperSearch extends SearchDelegate<String> {
   List<String> getFilteredList(List<String> wallpaper) {
     for (int i = 0; i < wallpaper.length; i++) {
       if (wallpaper[i].toLowerCase().startsWith(query)) {
-        filteredwallpapers.add(wallpaper[i]);
+        filteredAlcohols.add(wallpaper[i]);
       }
     }
-    return filteredwallpapers;
+    return filteredAlcohols;
   }
 
   @override
@@ -167,9 +167,9 @@ class WallpaperSearch extends SearchDelegate<String> {
         )),
       );
     } else {
-      filteredwallpapers = [];
-      getFilteredList(wallpapers);
-      if (filteredwallpapers.length == 0) {
+      filteredAlcohols = [];
+      getFilteredList(alcohols);
+      if (filteredAlcohols.length == 0) {
         return Container(
           color: Theme.of(context).primaryColor,
           child: Center(
@@ -197,9 +197,9 @@ class WallpaperSearch extends SearchDelegate<String> {
         return Container(
           color: Theme.of(context).primaryColor,
           child: ListView.builder(
-            itemCount: filteredwallpapers.length == null
+            itemCount: filteredAlcohols.length == null
                 ? 0
-                : filteredwallpapers.length,
+                : filteredAlcohols.length,
             itemBuilder: (context, index) {
               return ListTile(
                 leading: Icon(
@@ -207,14 +207,14 @@ class WallpaperSearch extends SearchDelegate<String> {
                   color: Theme.of(context).accentColor,
                 ),
                 title: Text(
-                  filteredwallpapers[index],
+                  filteredAlcohols[index],
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18.0,
                       color: Theme.of(context).accentColor),
                 ),
                 onTap: () {
-                  close(context, filteredwallpapers[index]);
+                  close(context, filteredAlcohols[index]);
                 },
               );
             },
